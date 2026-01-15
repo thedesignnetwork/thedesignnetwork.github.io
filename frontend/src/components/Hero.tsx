@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useRef, useEffect } from 'react';
+import { logger } from '@/lib/logger';
 
 export function Hero() {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -13,34 +14,34 @@ export function Hero() {
             return;
         }
 
-        console.log('Video element found, setting up...');
+        logger.info('Video element found, setting up...');
         video.volume = 0;
         video.muted = true;
         video.defaultMuted = true;
 
         // Define event handlers so they can be removed on cleanup
         const handleLoadStart = () => {
-            console.log('Video: loadstart');
+            logger.info('Video: loadstart');
         };
 
         const handleLoadedMetadata = () => {
-            console.log('Video: loadedmetadata');
+            logger.info('Video: loadedmetadata');
         };
 
         const handleCanPlay = () => {
-            console.log('Video: canplay');
+            logger.info('Video: canplay');
         };
 
         const handlePlaying = () => {
-            console.log('Video: playing');
+            logger.info('Video: playing');
         };
 
         const handleError = (e: Event) => {
-            console.error('Video error:', e);
+            logger.error('Video error:', e);
         };
 
         const handlePlay = () => {
-            console.log('Video play event fired');
+            logger.info('Video play event fired');
             video.muted = true;
             video.volume = 0;
         };
@@ -51,17 +52,15 @@ export function Hero() {
         video.addEventListener('canplay', handleCanPlay);
         video.addEventListener('playing', handlePlaying);
         video.addEventListener('error', handleError);
-
-        // Force mute on play
         video.addEventListener('play', handlePlay);
 
         // Try to play the video
         const playPromise = video.play();
         if (playPromise !== undefined) {
             playPromise
-                .then(() => console.log('Video autoplay successful'))
+                .then(() => logger.info('Video autoplay successful'))
                 .catch((error) =>
-                    console.error('Video autoplay failed:', error)
+                    logger.error('Video autoplay failed:', error)
                 );
         }
 
