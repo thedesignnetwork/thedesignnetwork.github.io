@@ -8,48 +8,72 @@ export function Hero() {
 
     // Ensure video is muted immediately on load to prevent any audio
     useEffect(() => {
-        if (videoRef.current) {
-            console.log('Video element found, setting up...');
-            videoRef.current.volume = 0;
-            videoRef.current.muted = true;
-            videoRef.current.defaultMuted = true;
-
-            // Add event listeners for debugging
-            videoRef.current.addEventListener('loadstart', () =>
-                console.log('Video: loadstart')
-            );
-            videoRef.current.addEventListener('loadedmetadata', () =>
-                console.log('Video: loadedmetadata')
-            );
-            videoRef.current.addEventListener('canplay', () =>
-                console.log('Video: canplay')
-            );
-            videoRef.current.addEventListener('playing', () =>
-                console.log('Video: playing')
-            );
-            videoRef.current.addEventListener('error', (e) =>
-                console.error('Video error:', e)
-            );
-
-            // Force mute on play
-            videoRef.current.addEventListener('play', () => {
-                if (videoRef.current) {
-                    console.log('Video play event fired');
-                    videoRef.current.muted = true;
-                    videoRef.current.volume = 0;
-                }
-            });
-
-            // Try to play the video
-            const playPromise = videoRef.current.play();
-            if (playPromise !== undefined) {
-                playPromise
-                    .then(() => console.log('Video autoplay successful'))
-                    .catch((error) =>
-                        console.error('Video autoplay failed:', error)
-                    );
-            }
+        const video = videoRef.current;
+        if (!video) {
+            return;
         }
+
+        console.log('Video element found, setting up...');
+        video.volume = 0;
+        video.muted = true;
+        video.defaultMuted = true;
+
+        // Define event handlers so they can be removed on cleanup
+        const handleLoadStart = () => {
+            console.log('Video: loadstart');
+        };
+
+        const handleLoadedMetadata = () => {
+            console.log('Video: loadedmetadata');
+        };
+
+        const handleCanPlay = () => {
+            console.log('Video: canplay');
+        };
+
+        const handlePlaying = () => {
+            console.log('Video: playing');
+        };
+
+        const handleError = (e: Event) => {
+            console.error('Video error:', e);
+        };
+
+        const handlePlay = () => {
+            console.log('Video play event fired');
+            video.muted = true;
+            video.volume = 0;
+        };
+
+        // Add event listeners for debugging
+        video.addEventListener('loadstart', handleLoadStart);
+        video.addEventListener('loadedmetadata', handleLoadedMetadata);
+        video.addEventListener('canplay', handleCanPlay);
+        video.addEventListener('playing', handlePlaying);
+        video.addEventListener('error', handleError);
+
+        // Force mute on play
+        video.addEventListener('play', handlePlay);
+
+        // Try to play the video
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => console.log('Video autoplay successful'))
+                .catch((error) =>
+                    console.error('Video autoplay failed:', error)
+                );
+        }
+
+        // Cleanup: remove all event listeners when component unmounts
+        return () => {
+            video.removeEventListener('loadstart', handleLoadStart);
+            video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+            video.removeEventListener('canplay', handleCanPlay);
+            video.removeEventListener('playing', handlePlaying);
+            video.removeEventListener('error', handleError);
+            video.removeEventListener('play', handlePlay);
+        };
     }, []);
 
     return (
