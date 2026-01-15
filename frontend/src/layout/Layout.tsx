@@ -1,7 +1,8 @@
 import React from 'react';
 import CardNav from '@/components/CardNav';
 import { ModeToggle } from '@/components/mode-toggle';
-import logo from '@/assets/logo.png';
+
+const logo = '/logo.png';
 
 const items = [
     {
