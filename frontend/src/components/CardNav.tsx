@@ -165,7 +165,7 @@ const CardNav: React.FC<CardNavProps> = ({
 
     return (
         <div
-            className={`card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[99] top-[1.2em] md:top-[2em] ${className}`}
+            className={`card-nav-container fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[99] top-[1.2em] md:top-[2em] ${className}`}
         >
             <nav
                 ref={navRef}
@@ -178,7 +178,7 @@ const CardNav: React.FC<CardNavProps> = ({
                     <div
                         className={`hamburger-menu ${
                             isHamburgerOpen ? 'open' : ''
-                        } group h-full flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2 md:order-none`}
+                        } group h-full flex flex-col items-center justify-center cursor-pointer gap-[6px] order-3 md:order-none`}
                         onClick={toggleMenu}
                         role='button'
                         aria-label={isExpanded ? 'Close menu' : 'Open menu'}
@@ -210,7 +210,7 @@ const CardNav: React.FC<CardNavProps> = ({
                     </div>
 
                     {action ? (
-                        <div className='card-nav-action hidden md:inline-flex h-full items-center'>
+                        <div className='card-nav-action flex order-2 ml-auto mr-4 md:mr-0 md:ml-0 md:order-none md:inline-flex h-full items-center'>
                             {action}
                         </div>
                     ) : (
