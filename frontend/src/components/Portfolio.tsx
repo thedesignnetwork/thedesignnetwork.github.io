@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { client } from '@/lib/sanity';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface Project {
     summary: string;
@@ -32,7 +33,7 @@ export function Portfolio() {
             tone,
             format,
             projectType
-          }`
+          }`,
             )
             .then((data) => {
                 console.log('Sanity Data:', data);
@@ -45,9 +46,48 @@ export function Portfolio() {
 
     if (!project) {
         return (
-            <div className='py-32 text-center text-red-500'>
-                Loading Portfolio... (Check Console if stuck)
-            </div>
+            <section id='portfolio' className='relative py-32 bg-background'>
+                <div className='container mx-auto px-6 sm:px-8 lg:px-12'>
+                    {/* Skeleton Header */}
+                    <div className='text-center mb-20 space-y-4'>
+                        <Skeleton className='h-4 w-32 mx-auto' />
+                        <Skeleton className='h-16 w-3/4 mx-auto' />
+                        <Skeleton className='h-8 w-1/2 mx-auto' />
+                    </div>
+
+                    {/* Skeleton Content */}
+                    <div className='max-w-6xl mx-auto'>
+                        <div className='relative bg-card border border-border rounded-3xl overflow-hidden shadow-xl'>
+                            {/* Video Skeleton */}
+                            <div className='relative flex justify-center bg-muted/20 p-8'>
+                                <Skeleton className='h-[600px] w-full max-w-[400px] rounded-xl' />
+                            </div>
+
+                            {/* Details Skeleton */}
+                            <div className='p-8 lg:p-12 space-y-6'>
+                                <div className='flex gap-4'>
+                                    <Skeleton className='h-8 w-24 rounded-full' />
+                                    <Skeleton className='h-8 w-32' />
+                                </div>
+                                <Skeleton className='h-10 w-2/3' />
+                                <div className='space-y-2'>
+                                    <Skeleton className='h-4 w-full' />
+                                    <Skeleton className='h-4 w-full' />
+                                    <Skeleton className='h-4 w-5/6' />
+                                </div>
+                                <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8'>
+                                    {[1, 2, 3, 4].map((i) => (
+                                        <div key={i} className='space-y-2'>
+                                            <Skeleton className='h-4 w-16' />
+                                            <Skeleton className='h-6 w-24' />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         );
     }
 
