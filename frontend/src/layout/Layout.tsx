@@ -1,12 +1,13 @@
 import React from 'react';
-import CardNav from '@/components/CardNav';
-import { ModeToggle } from '@/components/mode-toggle';
+import CardNav from '@/components/Navbar/CardNav';
+import { ModeToggle } from '@/components/Navbar/mode-toggle';
 
 const logo = '/logo.png';
 
 const items = [
     {
         label: 'About',
+        href: '/about',
         bgColor: '#0D0716',
         textColor: '#fff',
         links: [
