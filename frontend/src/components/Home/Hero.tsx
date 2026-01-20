@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import { logger } from '@/lib/logger';
-import Loader from './Loader';
+import Loader from '../ui/Loader';
 
 export function Hero() {
     const videoRef = useRef<HTMLVideoElement>(null);
