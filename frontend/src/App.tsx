@@ -9,6 +9,8 @@ import Loader from '@/components/ui/Loader';
 
 const About = lazy(() => import('@/pages/About'));
 
+import { ToolsTicker } from '@/components/CompaniesTicker';
+
 function App() {
     return (
         <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
@@ -20,6 +22,7 @@ function App() {
                             <>
                                 <Hero />
                                 <Portfolio />
+                                <ToolsTicker />
                             </>
                         }
                     />

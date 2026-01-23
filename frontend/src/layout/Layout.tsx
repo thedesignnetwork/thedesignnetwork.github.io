@@ -40,6 +40,8 @@ const items = [
     },
 ];
 
+import { Footer } from '@/components/Footer';
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className='relative min-h-screen w-full'>
@@ -55,6 +57,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 action={<ModeToggle />}
             />
             <main>{children}</main>
+            <Footer />
         </div>
     );
 };
