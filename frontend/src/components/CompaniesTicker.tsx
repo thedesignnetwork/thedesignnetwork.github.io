@@ -5,22 +5,26 @@ const companyLogos = [
         src: '/companies/jbmGroupLogo.svg',
         alt: 'JBM Group',
         href: 'https://www.jbmgroup.com',
+        className: 'bg-white rounded-md p-1',
     },
     {
         src: '/companies/lenskartLogo.svg',
         alt: 'Lenskart',
         href: 'https://www.lenskart.com',
+        className: 'bg-white rounded-md p-1',
     },
     // Add more companies here as needed
     {
         src: '/companies/jbmGroupLogo.svg',
         alt: 'JBM Group',
         href: 'https://www.jbmgroup.com',
+        className: 'bg-white rounded-md p-1',
     },
     {
         src: '/companies/lenskartLogo.svg',
         alt: 'Lenskart',
         href: 'https://www.lenskart.com',
+        className: 'bg-white rounded-md p-1',
     },
 ];
 

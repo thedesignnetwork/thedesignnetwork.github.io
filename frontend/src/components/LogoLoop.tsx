@@ -22,6 +22,7 @@ export type LogoItem =
           sizes?: string;
           width?: number;
           height?: number;
+          className?: string;
       };
 
 export interface LogoLoopProps {
@@ -414,6 +415,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
                             '[-webkit-user-drag:none] pointer-events-none',
                             '[image-rendering:-webkit-optimize-contrast]',
                             'motion-reduce:transition-none',
+                            (item as any).className,
                             scaleOnHover &&
                                 'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120',
                         )}
