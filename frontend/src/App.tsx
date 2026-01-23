@@ -1,9 +1,13 @@
+import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from '@/components/Navbar/theme-provider';
 import Layout from '@/layout/Layout';
-import { Hero } from '@/components/Hero';
-import { Portfolio } from '@/components/Portfolio';
+import { Hero } from '@/components/Home/Hero';
+import { Portfolio } from '@/components/Home/Portfolio';
 import NotFound from '@/pages/NotFound';
+import Loader from '@/components/ui/Loader';
+
+const About = lazy(() => import('@/pages/About'));
 
 import { ToolsTicker } from '@/components/CompaniesTicker';
 
@@ -20,6 +24,20 @@ function App() {
                                 <Portfolio />
                                 <ToolsTicker />
                             </>
+                        }
+                    />
+                    <Route
+                        path='/about'
+                        element={
+                            <Suspense
+                                fallback={
+                                    <div className='fixed inset-0 z-50 flex items-center justify-center bg-background'>
+                                        <Loader />
+                                    </div>
+                                }
+                            >
+                                <About />
+                            </Suspense>
                         }
                     />
                     <Route path='*' element={<NotFound />} />
